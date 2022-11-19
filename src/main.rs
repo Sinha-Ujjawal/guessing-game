@@ -33,9 +33,7 @@ fn prompt_until<T: FromStr>(msg: &'static str, validation_fn: &dyn Fn(&T) -> boo
                 println!("Couldn't parse {}, try again!", s)
             }
             Ok(val) => {
-                if !validation_fn(&val) {
-                    ()
-                } else {
+                if validation_fn(&val) {
                     return val;
                 }
             }
