@@ -56,7 +56,7 @@ impl Game {
 
     fn play(&self) {
         println!("Game Started!");
-        println!("Computer has thought of a number 1..100. Your job is to predict what it is using atmost 7 guesses.");
+        println!("Computer thinks of a number between 1 and 100 and you have to guess that number using atmost 7 guesses.");
         let mut guesses = 0;
         while guesses < 7 {
             let guess: u8 = prompt_until("Enter a guess: ", &|val| {
