@@ -46,6 +46,10 @@ struct Game {
 }
 
 impl Game {
+    fn new(rng: &mut rand::rngs::ThreadRng) -> Self {
+        Self{ answer: (rng.gen::<u8>() % 100) + 1 }
+    }
+
     fn play(&self) {
         println!("Game Started!");
         println!("Computer thinks of a number between 1 and 100 and you have to guess that number using atmost 7 guesses.");
@@ -76,6 +80,5 @@ impl Game {
 
 fn main() {
     let mut rng = rand::thread_rng();
-    let answer = (rng.gen::<u8>() % 100) + 1;
-    Game{answer}.play()
+    Game::new(&mut rng).play()
 }
