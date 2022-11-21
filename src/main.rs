@@ -47,7 +47,7 @@ struct Game {
 
 impl Game {
     fn new(rng: &mut rand::rngs::ThreadRng) -> Self {
-        Self{ answer: (rng.gen::<u8>() % 100) + 1 }
+        Self{ answer: rng.gen_range::<u8>(1..=100) }
     }
 
     fn play(&self) {
