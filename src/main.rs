@@ -42,16 +42,10 @@ fn prompt_until<T: FromStr>(msg: &'static str, validation_fn: &dyn Fn(&T) -> boo
 }
 
 struct Game {
-    value: u8,
+    answer: u8,
 }
 
 impl Game {
-    fn new(rng: &mut rand::rngs::ThreadRng) -> Self {
-        Self {
-            value: (rng.gen::<u8>() % 100) + 1,
-        }
-    }
-
     fn play(&self) {
         println!("Game Started!");
         println!("Computer thinks of a number between 1 and 100 and you have to guess that number using atmost 7 guesses.");
@@ -65,23 +59,23 @@ impl Game {
                 true
             });
             guesses += 1;
-            if guess > self.value {
+            if guess > self.answer {
                 println!("Too High!")
-            } else if guess < self.value {
+            } else if guess < self.answer {
                 println!("Too Low!")
             } else {
-                println!(":) You guessed it, the value was: {}", self.value);
+                println!(":) You guessed it, the value was: {}", self.answer);
                 println!("Total # of guesses: {}", guesses);
                 return ();
             }
         }
         println!("You couldn't guess it using atmost 7 guesses! :(");
-        println!("The value was: {}", self.value);
+        println!("The value was: {}", self.answer);
     }
 }
 
 fn main() {
     let mut rng = rand::thread_rng();
-    let game = Game::new(&mut rng);
-    game.play()
+    let answer = (rng.gen::<u8>() % 100) + 1;
+    Game{answer}.play()
 }
